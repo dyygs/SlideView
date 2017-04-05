@@ -1,7 +1,6 @@
 package com.dy.www.library;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +37,6 @@ public class DragRelativeLayout extends RelativeLayout implements SlideView.OnFo
 
     private void init() {
         minHeight = 0;
-        setBackgroundColor(Color.GREEN);
-        setFooterView(new SlideView(context));
     }
 
     public View getFooterView() {
@@ -62,7 +59,10 @@ public class DragRelativeLayout extends RelativeLayout implements SlideView.OnFo
 
     }
 
-    private void setFooterView(SlideView view) {
+    public void setFooterView(SlideView view) {
+        if (view == null) {
+            setFooterView(new SlideView(context));
+        }
         footerView = view;
         footerView.setOnFooterChangedListener(this);
         RelativeLayout.LayoutParams lp = new RelativeLayout

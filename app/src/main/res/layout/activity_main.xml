@@ -7,9 +7,14 @@
     android:orientation="vertical">
 
     <com.dy.www.library.DragRelativeLayout
+        android:id="@+id/drl_dragView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@mipmap/russel"
+        android:layout_centerInParent="true"/>
     </com.dy.www.library.DragRelativeLayout>
 
 </LinearLayout>
