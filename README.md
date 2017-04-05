@@ -8,7 +8,7 @@ A view can scroll by your finger! Just like android Notification.
 
 #### First:include to your project
 
-compile 'com.dy.www:slideview:1.0.0@aar'
+compile 'com.dy.www:slideview:1.1.0@aar'
 
 #### Second:add DragRelativeLayout in xml
 
