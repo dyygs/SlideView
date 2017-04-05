@@ -74,13 +74,9 @@ public class DragRelativeLayout extends RelativeLayout implements SlideView.OnFo
 
 
     @Override
-    public boolean onFooterChanged(int topLocation, int bottomLocation) {
-        if (topLocation < minHeight || bottomLocation > maxHeight) {
-            return false;
-        }
-        ViewGroup.LayoutParams lp = getLayoutParams();
-        lp.height = bottomLocation - getTop();
-        setLayoutParams(lp);
-        return true;
+    public int onFooterChanged(int offestY) {
+        int bottomLocation = getBottom() + offestY;
+        layout(getLeft(), getTop(), getRight(), bottomLocation);
+        return getBottom()- getTop();
     }
 }

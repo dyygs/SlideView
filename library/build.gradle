@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 25
@@ -19,6 +20,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+    publish {
+        userOrg = 'dyygs'      //bintray注册的用户名
+        groupId = 'com.dy.www'         //compile引用时的第1部分groupId
+        artifactId = 'slideview'     //compile引用时的第2部分项目名
+        publishVersion = '1.0.0'    //compile引用时的第3部分版本号
+        desc = 'A view can scroll by your finger! Just like android Notification. '
+        website = 'https://github.com/dyygs/SlideView'
+    }
 }
 
 dependencies {
@@ -28,4 +43,5 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
+    compile "com.android.support:recyclerview-v7:24.2.0"
 }

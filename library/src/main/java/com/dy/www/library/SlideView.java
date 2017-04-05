@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
  */
 
 public class SlideView extends RelativeLayout {
+    private boolean debug = false;
     private int mLastY;
     private int maxBottomLocation;
     private boolean isFirstMove = true;
@@ -51,10 +52,13 @@ public class SlideView extends RelativeLayout {
                 int bottomLocation;
                 topLocation = getTop() + offsetY;
                 bottomLocation = getBottom() + offsetY;
+                if (bottomLocation < height || bottomLocation > maxBottomLocation) {
+                    return true;
+                }
                 if (offsetY > scrollSpeed) {
                     if (isFirstMove) {
                         //滑动到底部
-                        scroll(topLocation, maxBottomLocation - 70);
+                        scroll(topLocation, maxBottomLocation - height);
                         isFirstMove = false;
                     }
                 }
@@ -68,9 +72,9 @@ public class SlideView extends RelativeLayout {
                 }
                 //调整layout的四个坐标
                 if (onFooterChangedListener != null) {
-                    boolean canMove = onFooterChangedListener.onFooterChanged(topLocation, bottomLocation);
-                    if (canMove) {
-                        layout(getLeft(), topLocation, getRight(), bottomLocation);
+                    int canMove = onFooterChangedListener.onFooterChanged(offsetY);
+                    if (canMove > 0) {
+                        layout(getLeft(), canMove - height, getRight(), canMove);
                     }
                 }
 
@@ -92,7 +96,7 @@ public class SlideView extends RelativeLayout {
 
 
     public interface OnFooterChangedListener {
-        boolean onFooterChanged(int topLocation, int bottomLocation);
+        int onFooterChanged(int offestY);
     }
 
     public void setMaxBottomLocation(int maxBottomLocation) {
@@ -106,12 +110,12 @@ public class SlideView extends RelativeLayout {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 //获取当前的height值
                 int top =(Integer)valueAnimator.getAnimatedValue();
-                int bottom = top + 70;
+                int offestY = top - getTop();
                 //动态更新view的高度
                 if (onFooterChangedListener != null) {
-                    boolean canMove = onFooterChangedListener.onFooterChanged(top, bottom);
-                    if (canMove) {
-                        layout(getLeft(), top, getRight(), bottom);
+                    int canMove = onFooterChangedListener.onFooterChanged(offestY);
+                    if (canMove > 0) {
+                        layout(getLeft(), canMove - height, getRight(), canMove);
                     }
                 }
             }
