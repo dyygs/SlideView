@@ -3,22 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dy.www.slideview.MainActivity"
-    android:orientation="vertical">
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+    android:orientation="vertical"
+    tools:context="com.dy.www.slideview.MainActivity">
+
     <com.dy.www.library.DragRelativeLayout
         android:id="@+id/drl_dragView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/view">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
     </com.dy.www.library.DragRelativeLayout>
 
 </RelativeLayout>
